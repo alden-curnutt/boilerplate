@@ -97,17 +97,17 @@ h6, .h6 { font-size: 1rem }
 hr { 
   margin: 0; 
   padding: 0;
-	border: 0;
-	background-color: #fff;
-	border-top: 1px solid #000; 
+  border: 0;
+  background-color: #fff;
+  border-top: 1px solid #000; 
 }
 img {
   border: none;
 }
 legend {
-	border: 1px solid black;
-	margin: 0px 30px;
-	padding: 5px 20px;
+  border: 1px solid black;
+  margin: 0px 30px;
+  padding: 5px 20px;
   line-height: 1em;
   border-radius: 2px;
 }
@@ -154,6 +154,7 @@ ul li { line-height: 1.5em;  }
 .tupper { text-transform: uppercase; }
 .tlower { text-transform: lowercase; }
 .tnormal { text-transform: none; }
+.tcap { text-transform: capitalize; }
 .ttop { text-align: top; }
 .tmiddle { text-align: middle; }
 .tbottom { text-align: bottom; }
