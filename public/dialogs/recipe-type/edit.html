@@ -1,0 +1,31 @@
+<style type="text/css"></style>
+
+<p class="dialog-title">Edit: Recipe Type</p><br>
+
+<div ng-show="false">
+	{{ type }}
+</div>
+
+
+<div id="rte">
+	
+	<input type="text" name="" ng-model="type.recipe_type"><br>
+	<label>Recipe Type Name</label><br><br>
+
+	<input type="text" name="" ng-model="type.recipe_background_hex"><br>
+	<label>Recipe Background Color</label><br><br>
+
+	<input type="text" name="" ng-model="type.recipe_color_hex"><br>
+	<label>Recipe Text Color</label><br><br>
+
+
+	<div class="form-actions">
+		<span class="btn btn-clear" ng-click="closeThis()">Close</span>
+		<span class="btn" ng-click="saveThis(type)">Save</span>
+	</div>
+	
+	<!--button ng-click="saveThis(type)">Clicky</button-->
+
+</div>
+
+

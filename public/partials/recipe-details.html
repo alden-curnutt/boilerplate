@@ -1,0 +1,250 @@
+<style type="text/css">
+
+.panel-transparent.panel-breadcrumbs { margin: 0 -8px; }
+#recipe-details #recipe-edit {
+	margin: 0 0 0 5px;
+}
+
+#recipe-details h4 {
+	margin: 0 0 10px 0;
+}
+
+section#time {
+	margin: 0 auto;
+	padding: 0;
+	width: 270px;
+	border-top: 2px solid #FF4200;
+	border-bottom: 2px solid #FF4200;
+}
+#time ul li p {
+	margin: 0 0 -5px 0;
+	font-size: .5rem;
+	color: #FF4200;
+}
+#time ul li {
+	float: left;
+	width: 33%;
+	text-align: center;
+	border-right: 1px dashed #FF4200;
+	font-size: .95rem;
+}
+#time ul li:last-child {
+	border-right: none;
+}
+#time .note {
+	color: #555;
+	margin-left: -4px;
+}
+
+
+.group {
+	margin: 15px 0 0 0;
+	border-bottom: 1px solid #EEE;
+	color: #FF4200;
+}
+
+
+#instructions .step-index {
+	margin: 0 0 6px 0;
+	color: #888;
+}
+#instructions .step {
+	margin: 0 0 0 15px;
+	padding: 5px 0 5px 15px;
+	border-left: 2px solid #FF4200;
+}
+
+#oops h2, #oops p {
+	margin: 0 0 10px 0;
+}
+
+@media (max-width: 992px) {
+	#instructions * {
+		font-size: 1rem;
+	} 
+}
+</style>
+
+<!-- START Recipe -->
+<div id="recipe-details" class="container"><br>
+
+	<!-- START Breadcrumbs -->
+	<div class="row clearfix">
+		<div class="col-xs-12">
+			<div class="panel panel-transparent panel-breadcrumbs">
+				<a href="#/">Home</a>
+				/
+				<a href="#/recipes">All Recipes</a>
+				/
+				<a href="#/recipes">{{ recipe.recipe_category }}</a>
+			</div>
+		</div>	
+	</div><!-- START Breadcrumbs -->
+
+
+	<!-- START Recipe Name -->
+	<div class="row clearfix">
+		<div class="col-xs-12">
+			<div class="panel panel-transparent">
+				<h2>{{ recipe.friendly_name }}
+					<span id="recipe-edit">
+						<i class="fa fa-pencil fmp-color-orange" ng-click="editThis(recipe)"></i>
+					</span>
+				</h2>
+			</div>
+		</div>
+	</div><!-- END Recipe Name -->
+
+	<!-- START Recipe Time -->
+	<div class="row clearfix" ng-show="recipe.recipe_time.total.hours || recipe.recipe_time.total.minutes">
+		<div class="col-xs-12">
+			<div class="panel panel-transparent">
+				<section id="time">
+					<ul class="clearfix">
+						<li>
+							<p>Prep</p>
+							<span ng-show="recipe.recipe_time.preparation.hours">
+								<span>
+									{{ recipe.recipe_time.preparation.hours }}
+									<span class="note">
+										hr
+									</span>
+								</span>
+							</span>&nbsp;
+							<span ng-show="recipe.recipe_time.preparation.minutes">
+								<span>
+									{{recipe.recipe_time.preparation.minutes }}
+									<span class="note">
+										min
+									</span>
+								</span>
+							</span>
+						</li>
+
+						<li>
+							<p>Cook</p>
+							<span ng-show="recipe.recipe_time.cook.hours">
+								<span>
+									{{ recipe.recipe_time.cook.hours }}
+									<span class="note">
+										hr
+									</span>
+								</span>
+							</span>&nbsp;
+							<span ng-show="recipe.recipe_time.cook.minutes">
+								<span>
+									{{recipe.recipe_time.cook.minutes }}
+									<span class="note">
+										min
+									</span>
+								</span>
+							</span>
+						</li>
+
+						<li>
+							<p>Total</p>
+							<span ng-show="recipe.recipe_time.total.hours">
+								<span>
+									{{ recipe.recipe_time.total.hours }}
+									<span class="note">
+										hr
+									</span>
+								</span>
+							</span>&nbsp;
+							<span ng-show="recipe.recipe_time.total.minutes">
+								<span>
+									{{recipe.recipe_time.total.minutes }}
+									<span class="note">
+										min
+									</span>
+								</span>
+							</span>
+						</li>
+					</ul>			
+				</section>
+			</div>
+		</div>
+	</div><!-- END Recipe Time -->
+
+
+	<!-- START Pic, Notes & Ref -->
+	<div class="row clearfix" ng-show="recipe.recipe_note || recipe.reference_url.length">
+		<div ng-class="{ 'col-xs-12 col-sm-4 col-md-3': recipe.images.full_uri }" ng-if="recipe.images.full_uri">
+			<div class="panel panel-white">
+				<p>poop</p>
+			</div>
+		</div>
+		<div ng-class="{ 'col-xs-12 col-sm-8 col-md-9': recipe.images.full_uri }">
+			<div class="panel panel-white">
+				<section ng-if="recipe.recipe_note">
+					<h4>Recipe Note</h4>
+					{{ recipe.recipe_note }}
+					<br><br>
+				</section>
+				<section ng-if="recipe.reference_url.length">
+					<h4>
+						Reference<span ng-show="recipe.reference_url.length > 1">s</span>
+					</h4>
+					<ul>
+						<li ng-repeat="url in recipe.reference_url">
+							<span ng-if="url.indexOf('http') != -1">
+								<a href="{{ url }}" class="link-blue" target="_blank">{{ url }}</a>
+							</span>
+							<span ng-if="url.indexOf('http') == -1">
+								{{ url }}
+							</span>
+						</li>
+					</ul>
+				</section>
+			</div>	
+		</div>
+	</div><!-- END Pic, Notes & Ref -->
+
+
+	<!-- START Ingredients -->
+	<div class="row clearfix" ng-show="recipe.ingredients.length">
+		<div class="panel panel-white">
+			<h4>Ingredients</h4>
+			<ul>
+				<li ng-repeat="group in recipe.preparation_groups">
+					<p class="group">{{ group }}</p>
+					<ul>
+						<li ng-repeat="ingredient in recipe.ingredients | filter: group" style="margin: 0 0 0 20px;">
+							<span ng-if="ingredient.major">{{ ingredient.major }}</span> 
+							<span ng-if="ingredient.minor">{{ ingredient.minor }}</span> 
+							<span ng-if="ingredient.measurement">{{ ingredient.measurement }}</span>
+							{{ ingredient.preparation_item }}
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div><!-- END Ingredients -->
+
+
+	<!-- START Instructs -->
+	<div class="row" ng-show="recipe.cooking_instructions.length">
+		<div class="panel panel-white" id="instructions">
+			<h4>Cooking Instructions</h4>
+			<ul>
+				<li ng-repeat="inst in recipe.cooking_instructions track by $index" style="margin: 0 0 12px 0;" class="clearfix">
+					<p class="step-index">Step {{ $index + 1 }}</p>
+					<p class="step">{{ inst }}</p>
+				</li>
+			</ul>
+		</div>
+	</div><!-- END Instructs -->
+
+
+	<!-- START No Data -->
+	<div id="oops" class="row clearfix" ng-show="!recipe.recipe_note && !recipe.reference_url.length && !recipe.cooking_instructions.length && !recipe.ingredients.length">
+		<div class="col-xs-12">
+			<div class="panel panel-white">
+				<h2>Oops!</h2>
+				<p>Looks like no information has been entered for this recipe. You can change all of that now by <span class="link-red pointer" ng-click="editThis(recipe)">editing</span> this recipe.</p>
+			</div>
+		</div>
+	</div><!-- END No Data -->
+
+
+</div><!-- END The Recipe -->

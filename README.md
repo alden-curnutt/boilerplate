@@ -1,2 +1,1 @@
-# boilerplate
-Skeleton project for quick start project development 
+# Family Meal Planning (FMP) Web Application

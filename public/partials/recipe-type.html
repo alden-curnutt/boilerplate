@@ -1,0 +1,64 @@
+<style type="text/css">
+#all-recipe-types {
+	margin: 15px 0;
+}
+
+
+.ngdialog-confirm-delete .ngdialog-content {
+	width: 400px !important;
+}
+
+.ngdialog-content h3 {
+	color:red;
+}
+
+.li-colors {
+	margin: 8px 0 0 0;
+	display: inline-block;
+	position: absolute;
+	height: 8px !important;
+	width: 8px !important;
+	border-radius: 10px;
+}
+.li-type {
+	padding: 0 0 0 15px;
+}
+
+</style>
+
+
+<div class="container" id="all-recipe-types">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-transparent">
+				<h2>
+					Recipe Types
+					<i class="fa fa-plus fmp-color-orange" ng-click="newRecipeTypeDialog()"></i>
+				</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">	
+			<div class="panel panel-white">
+				<ul class="ul-full-panel">
+					<li ng-repeat="type in recipeTypes | orderBy: 'recipe_type'" ng-class-odd="'odd-row'" ng-class-even="'even-row'">
+						<span class="li-colors" style="background-color: {{ type.recipe_background_hex }};"></span>
+						<span class="li-type">
+							{{ type.recipe_type }}
+						</span>
+
+						<span class="li-actions">
+							<i class="fa fa-pencil fmp-color-orange" ng-click="editThis(type)"></i>
+							<i class="fa fa-times fmp-color-orange" ng-click="deleteThis(type)"></i>
+						</span>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+

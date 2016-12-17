@@ -1,0 +1,245 @@
+<style type="text/css">
+
+#all-recipes, #all-recipes .panel-search {
+	margin: 15px 0;
+}
+.panel-search h3 {
+	margin: 0 0 5px 0;
+	border-bottom: 2px solid #DDD;
+}
+.panel-search .search-opt {
+
+}
+.panel-search .search-opt p {
+	margin: 0 0 5px 0;
+	color: #666;
+}
+.panel-search select {
+	min-width: 150px;
+}
+
+#all-recipes .panel-recipe {
+	margin: 13px 0;
+	height: 150px;
+	position: relative;
+	overflow: hidden;
+}
+#all-recipes .panel-recipe .recipe-title {
+	font-size: 1.2rem;	
+}
+#all-recipes .panel-recipe .tab-link {
+	display: inline-block;
+}
+#all-recipes .panel-recipe .tab-link i {
+	margin: -13px 0 0 0;
+	position: absolute;
+}
+#all-recipes .panel-recipe .recipe-cat {
+	color: #999;
+	font-size: .85rem;
+}
+
+#all-recipes .panel-recipe .recipe-title a {
+	color: #565656;
+}
+#all-recipes .panel-recipe .recipe-title i {
+	color:  #656565;
+}
+#all-recipes .recipe-image-editor {
+	margin: 0 0 -47px -10px;
+	padding: 7px;
+	width: 100%;
+	position: absolute;
+	bottom: 21px;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	text-align: right;
+	color: #FFF;
+	cursor: pointer;
+}
+#all-recipes .recipe-image-editor .fa-image {
+	float: left;
+}
+#all-recipes .recipe-image-editor:hover span {
+	text-decoration: underline;
+}
+#all-recipes .recipe-actions {
+	margin: 0 5px -47px -10px;
+	padding: 12px 10px;
+	width: 100%;
+	position: absolute;
+	bottom: 10px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	background-color: #FF4200;
+	text-align: right;
+}
+
+#all-recipes .panel-recipe:hover .recipe-actions { margin: 0 5px -10px -10px; }
+#all-recipes .panel-recipe:hover .recipe-image-editor { margin: 0 0 20px -10px; }
+#all-recipes .recipe-actions .fa {
+	margin: 0 0 0 0;
+	color: #EEE;
+}
+#all-recipes .recipe-actions .action-span {
+	border: 1px solid #FFF;
+	margin: 0 3px 0 8px;
+	padding: 0 6px 2px 9px;
+    border-radius: 4px;
+	color: #EEE;
+	cursor: pointer;
+}
+#all-recipes .recipe-actions .action-span:hover {
+	background-color: #FFF;
+}
+#all-recipes .recipe-actions .action-span:hover i, 
+#all-recipes .recipe-actions .action-span:hover span {
+	color: #FF4200;
+}
+
+.ngdialog-confirm-delete .ngdialog-content {
+	width: 400px !important;
+}
+.ngdialog-recipe-edit .ngdialog-content {
+	width: 80% !important;
+}
+
+.filters {
+	margin: 10px 0;
+}
+.filters .filter-bubble {
+	margin: 0 7px 0 0;
+	padding: 0px 11px 2px 1px;
+	background-color: #EEE;
+	border-radius: 12px;
+
+}
+.filters .filter-bubble .filter-remove {
+	background-color: #FF4200;
+	padding: 2px 5px 4px 5px;
+	border-radius: 12px;
+	color: #EEE;
+	cursor: pointer;
+}
+
+</style>
+
+<div id="all-recipes" class="container">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-transparent">
+				<h2>All Recipes <i class="fa fa-plus fmp-color-orange" ng-click="newRecipeDialog()"></i></h2>
+			</div>
+		</div>		
+	</div>
+
+
+	<!-- START Filters -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-white panel-search">
+				<h3>Filters / Search</h3>
+				<div class="search-opt">
+					<p>By Recipe Name</p>
+					<input type="text" ng-model="activeName.friendly_name">
+				</div><br>
+
+				<div class="search-opt">
+					<p>By Recipe Type</p>
+						
+						<select ng-model="categoryFilter" ng-change="filterRecipeBy()">
+							<option>Select</option>
+							<option ng-repeat="cat in recipeCategories track by $index" value="{{ cat }}">
+								{{ cat }}
+							</option>
+						</select>
+
+					<div class="filters">
+						<span ng-repeat="filter in activeCategories track by $index">
+							<span class="filter-bubble">
+								<i class="fa filter-remove" 
+								   ng-init="hover = false"
+								   ng-mouseenter="hover = true"
+								   ng-mouseleave="hover = false"
+								   ng-class="{ 'fa-filter': !hover, 'fa-times': hover }"
+								   ng-click="replaceFilter($index)">
+								</i> 
+								<span>{{ filter }}</span>
+							</span>
+						</span>
+					</div><br>
+
+					<div id="order-by">
+						<p>Order By:</p>
+						<span class="fmp-btn-group clearfix">
+							<span class="fmp-btn" 
+							      ng-class="{ 'active': orderByFilter == 'friendly_name' }" 
+							      ng-click="orderByFilter='friendly_name'">Name</span>
+							
+							<span class="fmp-btn"
+							      ng-class="{ 'active': orderByFilter == 'recipe_category' }"
+							      ng-click="orderByFilter='recipe_category'">Type</span>
+						</span><br>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div><!-- END Filters -->
+
+
+	<!-- START Display Recipe Object -->
+	<div class="row" ng-if="false">
+		<div class="col-xs-12">
+			<div class="panel panel-white">
+				<h2 style="margin: 0 0 10px 0;">Recipes Object:</h2>
+				<code style="font-family: monospace;">
+					{{ recipes }}
+				</code>
+			</div>
+		</div>
+	</div><!-- END Display Recipe Object -->
+
+
+	<!-- START Recipes -->
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="recipe in recipes | recipeFilter:activeCategories | filter:activeName | orderBy: orderByFilter">
+			<div class="panel panel-white panel-recipe">
+				<p class="recipe-title">
+					<a href="#/recipes/{{ recipe._id }}">
+						{{ recipe.friendly_name }}
+						
+					</a>
+					<a href="#/recipes/{{ recipe._id }}" class="tab-link" target="_blank">
+						<i class="fa fa-external-link"></i>
+					</a>
+				</p>
+				<span class="recipe-cat " ng-if="recipe.recipe_category">
+					({{ recipe.recipe_category }})
+				</span>
+				<div class="recipe-image-editor trans2">
+					<i class="fa fa-image"></i>
+					<i class="fa fa-plus" ng-show="recipe.images.thumb_url"></i>
+					<i class="fa fa-pencil" ng-show="!recipe.images.thumb_url"></i>
+					<span ng-show="recipe.images.thumb_url">Edit</span>
+					<span ng-show="!recipe.images.thumb_url">Add</span>
+				</div>
+				<div class="recipe-actions trans2">
+					<span class="action-span edit-this trans2" ng-click="editThis(recipe)">
+						<i class="fa fa-pencil fa-lg trans2"></i>
+						<span class="trans2">Edit</span>
+					</span>
+					
+					<span class="action-span delete-this trans2" ng-click="deleteThis(recipe)">
+						<i class="fa fa-close fa-lg trans2"></i>
+						<span class="trans2">Delete</span>
+					</span>				
+				</div>
+			</div>
+		</div>
+	</div><!-- END Recipes -->
+
+</div>
+
+

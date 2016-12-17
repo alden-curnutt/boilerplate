@@ -1,0 +1,70 @@
+<style type="text/css">
+
+.menu-item-li {
+	padding: 5px 0 5px 5px;
+	border-bottom: 1px solid #CCC;
+}
+.menu-item-li.last-li {
+	border-bottom: none;	
+}
+
+
+</style>
+<div class="container">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-transparent">
+				<h2>Family Meal Menu</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-white">
+				<table style="width: 100%;">
+					<tr>
+						<td class="" style="width: 90%; padding: 5px 0 5px 10px;">Meal</td>
+						<td class="tcenter" style="width: 10%;">Time</td>
+					</tr>
+				</table>
+				<ul>
+					<li ng-repeat="cat in recipeCategories">
+						
+						<p class="tcenter" style="background-color: {{ cat.recipe_background_hex }}; color: {{ cat.recipe_color_hex }}; border-radius: 2px; padding: 5px 0 5px 5px;">
+							{{ cat.recipe_type | uppercase}}
+						</p>
+						<ul>
+							<li ng-repeat="recipe in recipes | filter: { recipe_category: cat.recipe_type }"
+							    class="menu-item-li"
+							    ng-class="{ 'last-li' : $last }">
+								<table style="width: 100%;">
+									<tr>
+										<td class="" style="width: 90%; padding: 5px 0 5px 5px;">
+											<a href="" ng-href="#/recipes/{{ recipe._id }}" target="_blank">
+												{{ recipe.friendly_name }}
+											</a>
+										</td>
+										<td class="tcenter" style="width: 10%;">
+											<span ng-show="( recipe.recipe_time | calcTotalTime ) != '0 mins'">
+												{{ recipe.recipe_time | calcTotalTime }}
+												<!-- {{ recipe.recipe_time}} -->
+											</span>
+											<span ng-show="( recipe.recipe_time | calcTotalTime ) == '0 mins'">
+												-
+											</span>
+										</td>
+									</tr>
+								</table>
+
+							</li>
+						</ul>
+						
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</div>

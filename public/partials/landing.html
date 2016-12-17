@@ -1,0 +1,184 @@
+<style type="text/css">
+/*\
+|*|  Landing Page
+\*/
+#landing {
+	padding: 35px 10px 0 30px;
+	height: 100vh;
+	width: 100%;
+	position: absolute;
+	top: 0;
+ 	background: #FF4200; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(left top, #FF4200, purple); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(bottom right, #FF4200, purple); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(bottom right, #FF4200, purple); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to bottom right, #FF4200, purple); /* Standard syntax */
+
+	z-index: 100;
+}
+#landing .container, #landing .row-full-width {
+	padding: 0 !important;
+}
+#landing .container .row-full-width {
+	/*height: 100%;*/
+}
+
+#landing .landing-container {
+	/*height: 90%;*/
+}
+#landing #left {
+	/*height: 100%;*/
+	/*display: table;*/
+	text-align: center;
+}
+#landing #left p {
+	/*display: table-cell;*/
+	/*vertical-align: middle;*/
+	font-size: 2rem;
+	font-weight: bold;
+	color: #EEE;
+}
+
+#landing .app-wrap {
+	padding: 10px;
+}
+#landing .app-wrap .app-div {
+	padding: 10px 0;
+	border: 1px solid white;
+	border-radius: 5px;
+	text-align: center;
+	-o-transition:.2s; -ms-transition:.2s; -moz-transition:.2s; -webkit-transition:.2s; transition:.2s;
+}
+#landing .app-wrap .app-div p {
+	margin: 5px 0 0 0;
+	color: #EEE;
+	font-size: .75rem;
+}
+#landing .app-wrap .app-div a  {
+	display: block;
+	color: #EEE;
+}
+#landing .app-wrap .app-div:hover {
+	background-color: #EEE;
+}
+#landing .app-wrap .app-div:hover p,
+#landing .app-wrap .app-div:hover a i {
+	color: #FF4200;
+}
+
+
+/* #landing-toggle {
+    padding: 5px;
+    width: 42px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 110;
+    top: 0;
+    right: 7px;
+}
+#landing-toggle ul {}
+#landing-toggle ul li {
+    margin: 3px 0;
+	padding: 1px 10px;
+    border: 1px solid #FFF;
+    background-color: #FFF;
+    border-radius: 5px;
+    line-height: .2rem;
+}
+#landing-toggle:hover li {
+	background-color: transparent;
+}*/
+</style>
+
+
+<div id="landing">
+
+	<span id="landing-toggle" class="trans2" ng-click="openSlideoutIs(true)">
+		<ul>
+			<li class="trans2"></li>
+			<li class="trans2"></li>
+			<li class="trans2"></li>
+		</ul>
+		<!--ul>
+			<li><span class="nav-toggie-span"></span></li>
+			<li><span class="nav-toggie-span"></span></li>
+			<li><span class="nav-toggie-span"></span></li>
+		</ul-->
+	</span>
+	
+
+	<div class="container landing-container">
+		
+		<div class="row-full-width clearfix">
+			<div id="left" class="col-xs-12 col-sm-6">
+				<p>FAMILY<br> MEAL<br> PLANNING</p>
+			</div>
+			<div id="right" class="col-xs-12 col-sm-6">
+				<div class="container">
+					
+					<div class="row-full-width">
+						
+						<div class="col-xs-12 col-sm-6 app-wrap">
+							<div class="app-div">
+								<a href="/#/recipes">
+									<i class="fa fa-3x fa-spoon"></i>
+									<p>Recipes</p>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 app-wrap">
+							<div class="app-div">
+								<a href="/#/menu">
+									<i class="fa fa-3x fa-map"></i>
+									<p>Menu</p>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="row-full-width">
+						
+						<div class="col-xs-12 col-sm-6 app-wrap">
+							<div class="app-div">
+								<a href="">
+									<i class="fa fa-3x fa-dashboard"></i>
+									<p>Dashboard</p>
+								</a>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 app-wrap">
+							<div class="app-div">
+								<a href="">
+									<i class="fa fa-3x fa-trello"></i>
+									<p>Meal Planning</p>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--p>FAMILY <br>MEAL <br>PLANNING</p>
+
+	<ul id="options">
+		<li class="left">
+			<a href="/#/recipes">Recipes</a>
+		</li>
+		<li class="right">FMP</li>
+	</ul-->
+</div>

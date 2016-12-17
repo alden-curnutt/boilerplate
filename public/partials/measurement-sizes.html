@@ -1,0 +1,49 @@
+<style type="text/css">
+#all-recipe-types {
+	margin: 15px 0;
+}
+
+
+.ngdialog-confirm-delete .ngdialog-content {
+	width: 400px !important;
+}
+
+.ngdialog-content h3 {
+	color:red;
+}
+
+</style>
+
+
+<div class="container" id="all-measurement-sizes">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-transparent">
+				<h2>
+					Measurement Sizes
+					<i class="fa fa-plus fmp-color-orange" ng-click="newMeasurementSizeDialog()"></i>
+				</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">	
+			<div class="panel panel-white">
+				<ul class="ul-full-panel">
+					<li ng-repeat="size in sizes | orderBy: 'value'" ng-class-odd="'odd-row'" ng-class-even="'even-row'">
+						{{ size.friendly_name }} ({{ size.value }})
+
+						<span class="li-actions">
+							<i class="fa fa-pencil fmp-color-orange" ng-click="editThis(size)"></i>
+							<i class="fa fa-times fmp-color-orange" ng-click="deleteThis(size)"></i>
+						</span>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+

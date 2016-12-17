@@ -1,0 +1,336 @@
+<style type="text/css">
+
+
+
+.ngdialog-confirm-delete .ngdialog-content {
+	width: 400px !important;
+}
+.ngdialog-recipe-edit .ngdialog-content,
+.ngdialog-recipe-create .ngdialog-content {
+	width: 80% !important;
+}
+#re .fa-times, #re .fa-close {
+	cursor: pointer;
+}
+#re #recipe-name {
+	width: 100%;
+	max-width: 1000px;
+}
+#re #recipe-cat select { min-width: 180px; }
+#re .recipe-time {
+	width: 190px;
+	display: inline-block;
+}
+#re .recipe-time input {
+	margin: 0 15px 0 0;
+	width: 60px;
+}
+#re h3 { text-decoration: underline; }
+#re h3 i {
+	margin: 0 0 0 10px;
+	color: #FF4200;
+}
+#re .prep-group {
+	margin: 12px 0 0 0;
+}
+#re .prep-group input {
+	margin: 4px 0;
+	max-width: 85%;
+}
+#re .prep-group i {
+	margin: -1px 0 0 7px;
+	color: #FF4200;
+}
+#re .ingredients { margin: 15px 0; }
+#re .ingredients div.clearfix {
+	padding: 0 0 0 8px;
+	border-left: 3px solid #FF4200;
+	border-radius: 2px;
+}
+#re .ingredients .left, #re .ingredients .right {
+	float: left;
+}
+#re .ingredients .left { width: 30px; }
+#re .ingredients select {
+	margin: 0 10px 0 0;
+	min-width: 50px;
+}
+#re .ingredients .top,
+#re .ingredients .middle {
+	margin: 0 0 10px 0;
+}
+#re .ingredients .top, 
+#re .ingredients .bottom select {
+	min-width: 180px;
+}
+#re .ingredients input {
+	width: 100%;
+	max-width: 1000px;
+}
+#re .ingredients hr {
+	margin: 10px 0 0 0;
+	border: none;
+	border-top: 1px solid red;
+	border-bottom: 1px solid red;
+	border-radius: 3px
+}
+#re #cooking-instructs .instruction { margin: 10px 0; }
+#re #cooking-instructs .left,
+#re #cooking-instructs .right {
+	float: left;
+}
+#re #cooking-instructs .left { margin: 0 10px 0 0; }
+#re #cooking-instructs .right { width: 80%; }
+#re #cooking-instructs textarea {
+	width: 100%;
+	min-height: 65px;
+    max-width: 1000px;
+}
+#re #recipe-note { margin: 10px 0; }
+#re #recipe-note textarea {
+	width: 100%;
+	max-width: 1000px;
+	min-height: 65px
+}
+#re #recipe-note label {
+	display: block;
+	margin: -4px 0 0 7px;
+}
+#re #recipe-ref .ref { margin: 10px 0; }
+#re #recipe-ref .left,
+#re #recipe-ref .right {
+	float: left;
+}
+#re #recipe-ref .left { margin: 0 10px 0 0; }
+</style>
+
+<p class="dialog-title">Edit: Recipe</p><br>
+
+<div ng-show="false">
+	{{ recipe }}
+</div>
+
+<div id="re">
+	<br>
+	<input type="text" id="recipe-name" ng-model="recipe.friendly_name"><br>
+	<label>Recipe name</label><br><br>
+
+
+	<!-- START Recipe Category -->
+	<div id="recipe-cat">
+		<!--select ng-model="recipe.recipe_category" ng-options="option as option.recipe_type for option in recipeCategories track by option.recipe_type">
+		</select-->
+		<label class="select">
+			<select ng-model="recipe.recipe_category">
+				<option ng-repeat="cat in recipeCategoriesEdit | orderBy: 'recipe_type'">{{ cat.recipe_type }}</option>	
+			</select>
+		</label>
+
+		<br>
+		<label>Recipe Category</label><br><br>
+	</div><!-- END Recipe Category -->
+
+
+	<!-- START Recipe Time -->
+	<div class="recipe-time">
+		<input type="number" name="" ng-model="recipe.recipe_time.preparation.hours">
+		<input type="number" name="" ng-model="recipe.recipe_time.preparation.minutes"><br>
+		<label style="margin-left: 7px">Prep Hrs</label>
+		<label style="margin-left: 24px">Prep Mins</label>
+	</div>
+	<div class="recipe-time">
+		<input type="number" name="" ng-model="recipe.recipe_time.cook.hours">
+		<input type="number" name="" ng-model="recipe.recipe_time.cook.minutes"><br>
+		<label style="margin-left: 6px">Cook Hrs</label>
+		<label style="margin-left: 22px">Cook Mins</label>
+	</div><br><br><br><!-- END Recipe Time -->
+	
+
+	<!-- START All Preparation Groups -->
+	<h3>
+		Recipe Preparation Groups
+	</h3>
+	<!-- START Prep Group -->
+	<div class="prep-group" ng-repeat="group in recipe.preparation_groups track by $index">
+		<input type="text" ng-model="recipe.preparation_groups[$index]" value="{{ recipe.preparation_groups.id }}">
+		<i class="fa fa-close" ng-click="removePrepGroup($index)"></i><br>
+		<label>Preparation Group</label>
+	</div><!-- END Prep Group -->
+	
+	<hr class="separator"><!-- END All Ingredients -->
+	<p class="action-add" ng-click="addPrepGroup()">
+		<i class="fa fa-plus"></i>
+		Add Prep Group
+	</p>
+	<br><br>
+
+	<!-- START All Ingredients -->
+	<h3>
+		Ingredients
+	</h3>
+	<!-- START Ingredient -->
+	<div class="ingredients clearfix" ng-repeat="ingredient in recipe.ingredients track by $index">
+		<div class="clearfix">
+			<div class="left">
+				<i class="fa fa-close fmp-color-orange" ng-click="removeIngredient($index)"></i><br>
+			</div>
+			<div class="right">
+
+				<div class="top">
+					<!--select ng-model="recipe.ingredients[$index].major" ng-options="option for option in major">
+					</select-->
+					<!-- <ui-select ng-model="recipe.ingredients[$index].major">
+						<ui-select-match>
+							<span>{{ $select.size.friendly_name }}</span>
+						</ui-select-match>
+
+						<ui-select-choices repeat="size in (measurementSizes | filter: $select.search | orderBy: 'value') track by size.friendly_name">
+							<span>{{ size.friendly_name }}</span>
+						</ui-select-choices>
+					</ui-select> -->
+
+
+						<select ng-model="recipe.ingredients[$index].major">
+							<option></option>
+							<option ng-repeat="size in measurementSizes | orderBy: 'value'">{{ size.friendly_name }}</option>
+						</select>
+
+
+
+
+					<!--select ng-model="recipe.ingredients[$index].minor" ng-options="option for option in minor">
+					</select-->
+					<label class="select">
+						<select ng-model="recipe.ingredients[$index].minor">
+							<option></option>
+							<option ng-repeat="size in measurementSizes | orderBy: 'value'">{{ size.friendly_name }}</option>
+						</select>
+					</label>
+						
+					<label class="select">
+						<select ng-model="recipe.ingredients[$index].measurement">
+							<option></option>
+							<option ng-repeat="measure in measurements | orderBy: 'measurement'">{{ measure.measurement }}</option>	
+						</select>
+					</label><br>
+
+					<label>Major</label>
+					<label style="margin-left: 26px;">Minor</label>
+					<label style="margin-left: 28px;">Measurement</label>
+				</div>
+				
+				<div class="middle">
+					<input type="text" class="ingredient-note" ng-model="recipe.ingredients[$index].preparation_item"><br>
+					<label>Preparation Item &amp; Note</label>
+				</div>
+
+				<div class="bottom">
+					<label class="select">
+						<select ng-model="recipe.ingredients[$index].preparation_group">
+							<option ng-repeat="group in recipe.preparation_groups">{{ group }}</option>
+						</select>
+					</label><br>
+					<label>Preparation Group</label>
+				</div>
+
+				<div class="bottom">
+					<label class="select">
+						<select ng-model="recipe.ingredients[$index].pantry_category">
+							<option ng-repeat="category in pantryCategories | orderBy: 'friendly_name'">{{ category.friendly_name }}</option>
+						</select>
+					</label><br>
+					<label>Ingredient (Pantry) Category</label>
+				</div>
+
+			</div>
+		</div>
+	</div><!-- END Ingredient -->
+
+	<hr class="separator">
+	<p class="action-add" ng-click="addIngredient()">
+		<i class="fa fa-plus"></i>
+		Add Ingredient
+	</p>
+	<br><br>
+	<!-- END Recipes -->
+	
+
+	<!-- START Cooking Instructions -->
+	<h3>
+		Cooking Instructions
+	</h3>
+	<!-- START Instruction -->
+	<div id="cooking-instructs">
+		
+		<div class="instruction" ng-repeat="inst in recipe.cooking_instructions track by $index">
+			<div class="clearfix">
+				<div class="left">
+					<i class="fa fa-close fmp-color-orange" ng-click="removeInstruction($index)"></i>
+				</div>
+				<div class="right">
+					<textarea ng-model="recipe.cooking_instructions[$index]">
+						
+					</textarea>
+				</div>
+			</div>
+		</div>
+	</div><!-- End Instruction -->
+
+	<hr class="separator">
+	<p class="action-add" ng-click="addInstruction()">
+		<i class="fa fa-plus"></i>
+		Add Instruction
+	</p>
+	<br><br><!-- End Cooking Instructions -->
+
+
+	<!-- START Recipe Note -->
+	<h3>
+		Recipe Note(s)
+	</h3>
+	<div id="recipe-note">
+		<textarea ng-model="recipe.recipe_note">
+								
+		</textarea>
+		<label>Recipe Note</label>
+	</div><br><!-- END Recipe Note -->
+
+
+	<!-- START Cooking Instructions -->
+	<h3>
+		Recipe References
+	</h3>
+	<!-- START Instruction -->
+	<div id="recipe-ref">
+		
+		<div class="ref" ng-repeat="ref in recipe.reference_url track by $index">
+			<div class="clearfix">
+				<div class="left">
+					<i class="fa fa-close fmp-color-orange" ng-click="removeReference($index)"></i>
+				</div>
+				<div class="right">
+					<input type="text" ng-model="recipe.reference_url[$index]"><br>
+					<label>Reference URL</label>
+				</div>
+			</div>
+		</div><!-- End Instruction -->
+	</div>
+	
+	<hr class="separator">
+	<p class="action-add" ng-click="addReference()">
+		<i class="fa fa-plus"></i>
+		Add Reference
+	</p>
+	<br><br>
+	<!-- End Cooking Instructions -->
+
+	
+	<div class="form-actions">
+		<span class="btn btn-clear" ng-click="closeThis()">Close</span>
+		<span class="btn" ng-click="saveThis(recipe)">Save</span>
+	</div>
+
+
+</div>
+
+

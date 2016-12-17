@@ -1,0 +1,16 @@
+<p class="dialog-title">New Measurement Size</p><br>
+
+<div ng-show="false">
+	{{ new }}
+</div>
+
+<input type="text" name="" ng-model="new.friendly_name"><br>
+<label>Measurement Size Name (Ex: 1, ⅓, etc.)</label><br><br>
+
+<input type="number" name="" ng-model="new.value"><br>
+<label>Measurement Size Value (Ex. 1, .33, etc.)</label>
+
+<div class="form-actions">
+	<span class="btn btn-clear" ng-click="closeThis()">Close</span>
+	<span class="btn" ng-click="createMeasurementSize()">Create</span>
+</div>

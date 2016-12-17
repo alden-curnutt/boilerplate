@@ -1,0 +1,19 @@
+<p class="dialog-title">New Recipe Type</p><br>
+
+<div ng-show="false">
+	{{ new }}
+</div>
+
+<input type="text" name="" ng-model="new.recipe_type"><br>
+<label>Recipe Type Name (ex: Chicken, Beef)</label><br><br>
+
+<input type="text" name="" ng-model="new.recipe_background_hex"><br>
+<label>Recipe Background Color</label><br><br>
+
+<input type="text" name="" ng-model="new.recipe_color_hex"><br>
+<label>Recipe Text Color</label>
+
+<div class="form-actions">
+	<span class="btn btn-clear" ng-click="closeThis()">Close</span>
+	<span class="btn" ng-click="createRecipeType()">Create</span>
+</div>
