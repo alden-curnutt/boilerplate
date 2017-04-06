@@ -6,146 +6,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Family Meal Planning Application | version 0.0.1">
+<meta name="NodeJS Boilerplate" content="NodeJS Boilerplate | version 0.0.1">
 <meta name="author" content="Alden J. Curnutt">
 
 <!--  Tab Info  -->
-<title>Family Meal Planning</title>
-<!--link rel="shortcut icon" href="/assets/images/favicon.ico"-->
+<title>NodeJS BoilerPlate - 0.0.1</title>
 
 <!--  CSS  -->
 <link type="text/css" rel="stylesheet" href="assets/styles/css-lib/font-awesome.css">
-<link type="text/css" rel="stylesheet" href="assets/styles/css-lib/angular-growl/angular-growl.css">
-<link type="text/css" rel="stylesheet" href="assets/styles/css-lib/ngDialog/ngDialog.css">
-<link type="text/css" rel="stylesheet" href="assets/styles/css-lib/ngDialog/ngDialog-theme-default.css">
-<link type="text/css" rel="stylesheet" href="assets/styles/css-lib/ui-select/select.css">
 
 
 <link type="text/css" rel="stylesheet" href="assets/styles/base.css">
-<link type="text/css" rel="stylesheet" href="assets/styles/app.css">
-<style type="text/css"></style>
 
 <!--  JS  -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="assets/js-lib/angular/angular.js"></script>
 <script type="text/javascript" src="assets/js-lib/angular/angular-route.js"></script>
-<script type="text/javascript" src="assets/js-lib/angular-growl/angular-growl.js"></script>
-<script type="text/javascript" src="assets/js-lib/ngDialog/ngDialog.js"></script>
-<script type="text/javascript" src="assets/js-lib/ui-select/select.js"></script>
-
 
 <script type="text/javascript" src="assets/js/app.js"></script>
 <script type="text/javascript" src="assets/js/controllers/navController.js"></script>
-<script type="text/javascript" src="assets/js/controllers/recipeController.js"></script>
-<script type="text/javascript" src="assets/js/controllers/recipeTypeController.js"></script>
-<script type="text/javascript" src="assets/js/controllers/measurementController.js"></script>
-<script type="text/javascript" src="assets/js/controllers/measurementSizeController.js"></script>
-<script type="text/javascript" src="assets/js/controllers/pantryCategoryController.js"></script>
-<script type="text/javascript" src="assets/js/controllers/menuController.js"></script>
 
 </head>
-<body ng-app="fmp-app">
+<body ng-app="nodejs-boilerplate">
 
 
 
 
 <div id="body-content" ng-controller="navController">
-	<nav class="clearfix">
-		<img src="/assets/images/brand/white-on-red.png" style="max-width: 32px; float: left; margin: 1px 10px 0 10px;">
-		<p id="nav-title" class="visible-lg visible-md hidden-sm hidden-xs">
-			<a href="/#/" title="home">FAMILY MEAL PLANNING</a></p>
-		<p id="nav-title" class="visible-xs visible-sm hidden-md hidden-lg">
-			<a href="/#/" title="home">FMP</a></p>
-
-		<span id="nav-toggle" class="trans2" ng-click="openSlideoutIs(true)">
-			<ul>
-				<li class="trans2"></li>
-				<li class="trans2"></li>
-				<li class="trans2"></li>
-			</ul>
-			<!--ul>
-				<li><span class="nav-toggie-span"></span></li>
-				<li><span class="nav-toggie-span"></span></li>
-				<li><span class="nav-toggie-span"></span></li>
-			</ul-->
-		</span>
-	</nav>
-
-	<div growl></div>
-
-	<div ng-view
-	     id="ng-view"
-	     class="clearfix"
-	     ng-click="openSlideoutIs(false)">
-	 </div>
-
-	<footer class="clearfix">
-		<img src="/assets/images/brand/red-on-white.png" class="b-s">
-		<p>
-			<span id="fmp" class="fmp-color-orange em b">Family Meal Planning</span>
-			<span class="m-r-10 m-l-10 note">•</span>
-			<span class="note">Powered by:</span>
-			<span class="note b">CurNasty Development</span>
-		</p>
-	</footer>
-
-	<div id="slideout-nav" class="trans2" ng-class="{ 'nav-visible' : slideoutNav }">
-		<span id="slideout-title">
-			Menu
-		</span>
-		<span id="slideout-close">
-			<i class="fa fa-close fa-lg pointer trans2" ng-click="openSlideoutIs(false)"></i>
-		</span>
-		
-		<ul>
-			<li class="trans2">Meal Planning</li>
-			<ul>
-				<li class="trans2">
-					<i class="fa fa-spoon"></i>
-					<a href="/#/recipes">Recipes</a>
-					<span class="status status-green"></span>
-				</li>
-				<li class="trans2">
-					<i class="fa fa-map"></i>
-					<a href="/#/menu">Menu</a>
-					<span class="status status-yellow"></span>
-				</li>
-				<li class="trans2">
-					<i class="fa fa-trello"></i>
-					<a href="">Meal Planning</a>
-					<span class="status status-red"></span>
-				</li>
-			</ul>
-			<li class="trans2">Support</li>
-			<ul>
-				<li class="trans2">
-					<i class="fa fa-edit"></i>
-					<a href="/#/recipe-types">Recipe Types</a>
-					<span class="status status-yellow"></span>
-				</li>
-				<li class="trans2">
-					<i class="fa fa-balance-scale"></i>
-					<a href="/#/measurements">Measurement Types</a>
-					<span class="status status-yellow"></span>
-				</li>
-				<li class="trans2">
-					<i class="fa fa-calculator"></i>
-					<a href="/#/measurement-sizes">Measurement Sizes</a>
-					<span class="status status-yellow"></span>
-				</li>
-				<li class="trans2">
-					<i class="fa fa-cubes"></i>
-					<a href="/#/pantry">Pantry</a>
-					<span class="status status-yellow"></span>
-				</li>
-				<li class="trans2">
-					<i class="fa fa-photo"></i>
-					<a href="">Image Repo</a>
-					<span class="status status-red"></span>
-				</li>
-			</ul>
-		</ul>
-	</div>
+	
 
 </div>
 
@@ -154,4 +42,3 @@
 
 
 </body>
-</html>

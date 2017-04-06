@@ -1,16 +1,8 @@
-var app = angular.module('fmp-app');
+var app = angular.module('nodejs-boilerplate');
 
-app.controller('navController', function($scope, growl) {
+app.controller('navController', function($scope) {
 	
-	$scope.slideoutNav = false;
+	$scope.poop = 'poop';
 
-	$scope.openSlideoutIs = function(bool) {
-		$scope.slideoutNav = bool;		
-	};
-
-	$scope.$on('$locationChangeStart', function(event) {
-    	$scope.openSlideoutIs(false);
-	});
-	
-
+		
 });
